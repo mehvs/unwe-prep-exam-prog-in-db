@@ -67,7 +67,23 @@ BEGIN
 END;
 GO
 
---9(unfinished)
+--9(unsure if correct)
+SELECT
+  ProductID,
+  ProductName,
+  UnitPrice,
+  Sum_Product_Sales(ProductID) AS TotalSales
+FROM
+  Products
+WHERE
+  (
+    SELECT
+      COUNT(*)
+    FROM
+      OrderDetails
+    WHERE
+      ProductID = Products.ProductID
+  ) > 50;
 
 --10
 CREATE FUNCTION Avg_Product_Qty(@like nvarchar(255))
